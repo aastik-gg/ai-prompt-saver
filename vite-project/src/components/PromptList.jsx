@@ -1,9 +1,16 @@
 import React from 'react';
+import PromptCard from './PromptCard'; 
 
-const PromptList = () => {
+const PromptList = ({ prompts }) => {
   return (
     <div>
-      <h1>PromptList</h1>
+      {prompts.length > 0 ? (
+        prompts.map((prompt) => (
+          <PromptCard key={prompt.id} prompt={prompt} />
+        ))
+      ) : (
+        <p>No prompts found.</p>
+      )}
     </div>
   );
 };

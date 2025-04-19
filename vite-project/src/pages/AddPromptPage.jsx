@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react";
+import AddPrompt from "../components/AddPrompt";
 
 const AddPromptPage = () => {
   return (
-    <div>
-      <h1>Add Prompt Page</h1>
+    <div className="min-h-screen">
+      <AddPrompt />
     </div>
   );
 };

@@ -1,9 +1,12 @@
-import React from 'react';
+import { useParams } from "react-router-dom";
+import EditPrompt from "../components/EditPrompt";
 
 const EditPromptPage = () => {
+  const { id } = useParams();
+
   return (
-    <div>
-      <h1>Edit Prompt Page</h1>
+    <div className="min-h-screen">
+      <EditPrompt id={id} />
     </div>
   );
 };
