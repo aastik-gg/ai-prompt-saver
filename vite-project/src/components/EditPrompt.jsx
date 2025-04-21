@@ -1,27 +1,26 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { getPromptById, updatePrompt } from "../services/api";
-import toast from "react-hot-toast";
-import { motion } from "framer-motion";
+import { useParams, useNavigate } from "react-router-dom"; // I use this to get the prompt ID and navigate after editing.
+import { getPromptById, updatePrompt } from "../services/api"; // I call these API functions to fetch and update the prompt.
+import toast from "react-hot-toast"; // I use this to show success or error messages.
+import { motion } from "framer-motion"; // I use this for animations.
 
 const EditPrompt = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
+  const { id } = useParams(); // I get the prompt ID from the URL.
+  const navigate = useNavigate(); // I navigate the user after updating the prompt.
   const [prompt, setPrompt] = useState({
     title: "",
     description: "",
     content: "",
     category: "",
-  });
+  }); // I store the prompt details in this state.
 
   useEffect(() => {
     const fetchPrompt = async () => {
       try {
-        const data = await getPromptById(id);
-        setPrompt(data);
+        const data = await getPromptById(id); // I fetch the prompt data by its ID.
+        setPrompt(data); // I update the state with the fetched data.
       } catch (error) {
-        console.error("Error fetching prompt:", error);
-        toast.error("Failed to load prompt");
+        toast.error("Failed to load prompt"); // I show an error message if the fetch fails.
       }
     };
     fetchPrompt();
@@ -29,24 +28,23 @@ const EditPrompt = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setPrompt({ ...prompt, [name]: value });
+    setPrompt({ ...prompt, [name]: value }); // I update the corresponding field in the state.
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // I prevent the default form submission behavior.
 
     if (!prompt.title || !prompt.content || !prompt.category) {
-      toast.error("Please fill all required fields");
+      toast.error("Please fill all required fields"); // I show an error if required fields are empty.
       return;
     }
 
     try {
-      await updatePrompt(id, prompt);
-      toast.success("Prompt updated successfully");
-      navigate(`/prompt/${id}`);
+      await updatePrompt(id, prompt); // I call the API to update the prompt.
+      toast.success("Prompt updated successfully"); // I show a success message.
+      navigate(`/prompt/${id}`); // I navigate to the updated prompt's detail page.
     } catch (error) {
-      console.error("Error updating prompt:", error);
-      toast.error("Update failed");
+      toast.error("Update failed"); // I show an error message if the update fails.
     }
   };
 
@@ -68,7 +66,7 @@ const EditPrompt = () => {
             <input
               type="text"
               name="title"
-              value={prompt.title}
+              value={prompt.title} // I bind the title state to this input.
               onChange={handleChange}
               placeholder="Enter prompt title"
               className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
@@ -81,7 +79,7 @@ const EditPrompt = () => {
             </label>
             <textarea
               name="description"
-              value={prompt.description}
+              value={prompt.description} // I bind the description state to this textarea.
               onChange={handleChange}
               placeholder="Short description (optional)"
               className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
@@ -94,7 +92,7 @@ const EditPrompt = () => {
             </label>
             <textarea
               name="content"
-              value={prompt.content}
+              value={prompt.content} // I bind the content state to this textarea.
               onChange={handleChange}
               placeholder="Prompt content..."
               className="w-full p-3 border border-gray-300 rounded-xl min-h-[120px] focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
@@ -106,7 +104,7 @@ const EditPrompt = () => {
             <input
               type="text"
               name="category"
-              value={prompt.category}
+              value={prompt.category} // I bind the category state to this input.
               onChange={handleChange}
               placeholder="e.g., Storytelling"
               className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"

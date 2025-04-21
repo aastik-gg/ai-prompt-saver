@@ -1,6 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion'; // I use this for animations.
+import { Link } from 'react-router-dom'; // I use this for navigation.
 
 const Home = () => {
   return (
@@ -35,13 +35,14 @@ const Home = () => {
           transition={{ delay: 0.9, duration: 0.6 }}
         >
           <Link to="/all-prompts">
-          <button className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg text-lg shadow-lg transition">
-            Explore Prompts
-          </button>
+            <button className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg text-lg shadow-lg transition">
+              Explore Prompts
+            </button>
           </Link>
         </motion.div>
       </motion.div>
 
+      {/* I add animated decorative shapes in the background */}
       <div className="absolute inset-0 z-0">
         <div className="animate-revolve absolute top-10 left-10 w-24 h-24 border-4 border-purple-500 rounded-full"></div>
         <div className="animate-revolve absolute top-1/4 left-1/3 w-32 h-32 border-4 border-indigo-400 rounded-md"></div>
